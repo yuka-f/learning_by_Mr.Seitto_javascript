@@ -8,12 +8,12 @@ const answers = [
 const correct = '好奇心と発想力を活かしたいから';
 
 const $button = document.getElementsByTagName('button')
+const buttonLength = $button.length;
 
 // クイズの問題文、選択肢を定義(まとまりごとに関数に入れるとみやすくなる)
 const setupQuiz = () => {
   document.getElementById('js-question').textContent = question;
   let buttonIndex = 0;
-  let buttonLength = $button.length;
   while(buttonIndex < buttonLength){
     $button[buttonIndex].textContent = answers[buttonIndex];
     buttonIndex++;
@@ -21,7 +21,7 @@ const setupQuiz = () => {
 }
 setupQuiz();
 
-const clickHandler = () => {
+const clickHandler = (e) => {
   if(correct === e.target.textContent){
     window.alert('当たり！');
   } else {
@@ -29,17 +29,11 @@ const clickHandler = () => {
   }
 };
 
-
 // ボタンをクリックしたら正誤判定
-$button[0].addEventListener('click', (e) => {
-  clickHandler();
-});
-$button[1].addEventListener('click', (e) => {
-  clickHandler();
-});
-$button[2].addEventListener('click', (e) => {
-  clickHandler();
-});
-$button[3].addEventListener('click', (e) => {
-  clickHandler();
-});
+let handlerIndex = 0;
+while (handlerIndex < buttonLength) {
+  $button[handlerIndex].addEventListener('click', (e) => {
+    clickHandler(e);
+  });
+  handlerIndex++;
+}
