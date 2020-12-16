@@ -39,28 +39,40 @@ const quiz = [
 ];
 const quizLength = quiz.length;
 let quizIndex = 0;
+let score = 0;
 
 const $button = document.getElementsByTagName('button')
 const buttonLength = $button.length;
 
 // クイズの問題文、選択肢を定義(まとまりごとに関数に入れるとみやすくなる)
 const setupQuiz = () => {
-  document.getElementById('js-question').textContent = question;
+  document.getElementById('js-question').textContent = quiz[quizIndex].question;
   let buttonIndex = 0;
   while(buttonIndex < buttonLength){
-    $button[buttonIndex].textContent = answers[buttonIndex];
+    $button[buttonIndex].textContent = quiz[quizIndex].answers[buttonIndex];
     buttonIndex++;
   }
 }
 setupQuiz();
 
 const clickHandler = (e) => {
-  if(correct === e.target.textContent){
+  if(quiz[quizIndex].correct === e.target.textContent){
     window.alert('当たり！');
+    score++;
   } else {
     window.alert('残念！');
   }
+
+  quizIndex++;
+
+  if(quizIndex < quizLength){
+    setupQuiz();
+  }else {
+    window.alert('おしまいです！といてくれてありがとう！あなたの正解数は' + score + '/' + quizLength + 'です！')
+  }
 };
+
+
 
 // ボタンをクリックしたら正誤判定
 let handlerIndex = 0;
