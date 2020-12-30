@@ -4,7 +4,11 @@
     const $tab = $doc.getElementById('js-tab');
     const $nav = $tab.querySelectorAll('[data-nav]');
     const $content = $tab.querySelectorAll('[data-content]')
-
-    console.log('save', $nav);
-
+    
+    // 初期化 
+    const init = () => {
+        $const[0].style.display = 'block';
+    };
+    init();
+ 
 })();
